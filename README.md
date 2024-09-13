@@ -38,7 +38,14 @@ This project demonstrates how to implement Flyway database migrations in a Sprin
     spring.datasource.url=jdbc:postgresql://localhost:5432/your-database-name
     spring.datasource.username=your-username
     spring.datasource.password=your-password
+    spring.datasource.driver-class-name=org.postgresql.Driver
+    
+    spring.jpa.show-sql=true
+    spring.jpa.hibernate.ddl-auto=none
+
     spring.flyway.enabled=true
+    spring.flyway.baseline-on-migrate=true
+    spring.flyway.locations=classpath:db/migration
     ```
 
 4. **Add Flyway Dependencies**
@@ -46,14 +53,21 @@ This project demonstrates how to implement Flyway database migrations in a Sprin
    Ensure the following dependencies are included in your `pom.xml`:
 
     ```xml
-    <dependency>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-core</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
     ```
 
 5. **Create Migration Scripts**
