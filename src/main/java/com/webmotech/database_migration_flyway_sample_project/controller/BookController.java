@@ -32,4 +32,40 @@ public class BookController {
         }
 
     }
+
+    @PutMapping
+    public ResponseEntity<?> updateBook(@RequestBody BookDTO bookDTO, BindingResult bindResult) {
+        if (bindResult.hasErrors()) {
+            return ResponseEntity.badRequest().body("Invalid Request");
+        }
+
+        try {
+            return ResponseEntity.ok(bookService.updateBook(bookDTO));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
+
+    @GetMapping("/{bookId}")
+    public ResponseEntity<?> getBook(@PathVariable String bookId) {
+        try {
+            return ResponseEntity.ok(bookService.getBook(bookId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
+
+    @DeleteMapping("/{bookId}")
+    public ResponseEntity<?> deleteBook(@PathVariable String bookId) {
+        try {
+            bookService.deleteBook(bookId);
+            return ResponseEntity.ok("Book deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
+
 }

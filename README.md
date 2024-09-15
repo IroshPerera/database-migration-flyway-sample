@@ -2,7 +2,32 @@
 
 ## Overview
 
-This project demonstrates how to implement Flyway database migrations in a Spring Boot application using PostgreSQL. It provides a step-by-step guide for setting up Flyway, creating and managing versioned SQL scripts, and ensuring your database schema stays consistent across environments.
+This project demonstrates how to implement Flyway database migrations in a Spring Boot application using PostgreSQL. It
+provides a step-by-step guide for setting up Flyway, creating and managing versioned SQL scripts, and ensuring your
+database schema stays consistent across environments.
+
+## What is Database Migration?
+
+Database migration is the process of moving data from one or more databases to another while ensuring that the data
+remains accessible and usable. This process is particularly important when updating the database schema as part of
+continuous development. By versioning each schema change, database migration tools ensure consistency across different
+environments (development, staging, production).
+
+### Why is it Useful?
+
+- **Maintains Data Integrity:** When applications grow, database structures evolve. Migration ensures these changes are
+  applied in an orderly manner across environments without data loss.
+
+- **Version Control for Schemas:** Like code versioning, database migration allows tracking of each change, rollback to
+  previous versions if needed, and smooth application upgrades.
+
+- **Automates Schema Updates:** Automated migrations reduce human error by managing scripts that evolve your database in
+  sync with your code.
+
+## Why Flyway? 
+- Flyway’s lightweight nature and tight integration with Spring Boot make it an ideal tool for managing database changes
+in a controlled manner. Each migration is tracked and applied automatically, ensuring smooth and reliable database
+evolution without manual intervention.
 
 ## Features
 
@@ -15,7 +40,7 @@ This project demonstrates how to implement Flyway database migrations in a Sprin
 
 - Java 17 or later
 - Maven 3.6 or later
-- PostgreSQL database
+- PostgreSQL database / Your preferred database
 
 ## Setup
 
@@ -38,7 +63,7 @@ This project demonstrates how to implement Flyway database migrations in a Sprin
     spring.datasource.url=jdbc:postgresql://localhost:5432/your-database-name
     spring.datasource.username=your-username
     spring.datasource.password=your-password
-    spring.datasource.driver-class-name=org.postgresql.Driver
+    spring.datasource.driver-class-name=org.postgresql.Driver // Your driver class name
     
     spring.jpa.show-sql=true
     spring.jpa.hibernate.ddl-auto=none
@@ -72,7 +97,8 @@ This project demonstrates how to implement Flyway database migrations in a Sprin
 
 5. **Create Migration Scripts**
 
-   Place your SQL migration scripts in the `src/main/resources/db/migration` directory. Naming convention should follow `V1__Initial_setup.sql`, `V2__Add_some_feature.sql`, etc.
+   Place your SQL migration scripts in the `src/main/resources/db/migration` directory. Naming convention should follow
+   `V1__Initial_setup.sql`, `V2__Add_some_feature.sql`, etc.
 
 6. **Run the Application**
 
@@ -92,8 +118,9 @@ This project demonstrates how to implement Flyway database migrations in a Sprin
 Here's a sample migration script (`V1__Create_table.sql`):
 
 ```sql
-CREATE TABLE example (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE example
+(
+    id   SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
 );
 ```
